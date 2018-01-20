@@ -42,40 +42,56 @@ class DDZ:
         self.beta_cards = self.total_cards_id[20:37]
         self.gamma_cards = self.total_cards_id[37:] 
 
-    def cards_type(prev_cards, group):
-        #Sort the group of cards
+    def cards_type(self, group):
+        # Sort the group of cards
         group.sort()
 
-        if len(prev_cards) == 1:
+        # CONDITIONS BEGIN
+        if len(group) == 1:
             return 'single'
 
-        else if len(prev_cards) == 2:
+        elif len(group) == 2:
             if group[0] == group[1]:
                 return 'double'
 
-            else if group[0] == 'bj' or group[0] == 'rj':
+            elif group[0] == 'bj' or group[0] == 'rj':
                 return 'kbomb'
 
-        else if len(prev_cards) == 3:
+            else:
+                return 'false'
+
+        elif len(group) == 3:
             if group[0] == group[1] == group[2]:
                 return 'triple'
+            
+            else:
+                return 'false'
 
-        else if len(prev_cards) == 4:
+        elif len(group) == 4:
             if group[0] == group[1] == group[2] == group[3]:
                 return 'bomb'
 
-            else if group[0] == group[1] == group[2] != group[3] or group[1] == group[2] == group[3] != group[0]:
+            elif group[0] == group[1] == group[2] != group[3] or group[1] == group[2] == group[3] != group[0]:
                 return 'triple+1'
+            
+            else:
+                return 'false'
 
-        else if len(prev_cards) == 5:
+        elif len(group) == 5:
             if group[4] == group[3] + 1 == group[2] + 2 == group[1] + 3 == group[0] + 4:
                 return 'shunzi'
             
-            else if group[0] == group[1] == group[2] != group[3] == group[4] or group[2] == group[3] == group[4] != group[0] == group[1]:
+            elif group[0] == group[1] == group[2] != group[3] == group[4] or group[2] == group[3] == group[4] != group[0] == group[1]:
                 return 'triple+2'
 
-            else if group[0] == group[1] == group[2] == group[3] != group[4] or group[1] == group[2] == group[3] == group[4] != group[0]:
+            elif group[0] == group[1] == group[2] == group[3] != group[4] or group[1] == group[2] == group[3] == group[4] != group[0]:
                 return 'four+1'
+            else:
+                return 'false'
+        
+        # CONDITIONS END
+        else:
+            return 'false'
                 
                 
 
@@ -97,17 +113,14 @@ class DDZ:
             '40':'13', '41':'13', '42':'13', '43':'13',
             '44':'1', '45':'1', '46':'1', '47':'1',
             '48':'2', '49':'2', '50':'2', '51':'2',
-            '52':'bj','53','rj'
+            '52':'bj','53':'rj'
         }
 
         # Single Card
         if len(prev_cards) == 1:
             group = groups[prev_cards]
             #TODO ADD POLICY HERE
-            available_actions = 
-        
-        # Double Cards
-        if len(prev_cards) == 2:
+            #available_actions = 
         
         #TODO ADD CONDITIONS HERE
 
@@ -153,9 +166,3 @@ class gamma(DDZ):
     def status_check(self):
         if len(self.cards) == 0:
             self.status = -1
-    
-alpha = alpha()
-print(alpha.cards)
-alpha.discard([1,2,3,4,5,6,7,8])
-print(alpha.cards)
-print(alpha.prev_hand)
