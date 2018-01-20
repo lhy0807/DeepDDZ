@@ -42,6 +42,44 @@ class DDZ:
         self.beta_cards = self.total_cards_id[20:37]
         self.gamma_cards = self.total_cards_id[37:] 
 
+    def cards_type(prev_cards, group):
+        #Sort the group of cards
+        group.sort()
+
+        if len(prev_cards) == 1:
+            return 'single'
+
+        else if len(prev_cards) == 2:
+            if group[0] == group[1]:
+                return 'double'
+
+            else if group[0] == 'bj' or group[0] == 'rj':
+                return 'kbomb'
+
+        else if len(prev_cards) == 3:
+            if group[0] == group[1] == group[2]:
+                return 'triple'
+
+        else if len(prev_cards) == 4:
+            if group[0] == group[1] == group[2] == group[3]:
+                return 'bomb'
+
+            else if group[0] == group[1] == group[2] != group[3] or group[1] == group[2] == group[3] != group[0]:
+                return 'triple+1'
+
+        else if len(prev_cards) == 5:
+            if group[4] == group[3] + 1 == group[2] + 2 == group[1] + 3 == group[0] + 4:
+                return 'shunzi'
+            
+            else if group[0] == group[1] == group[2] != group[3] == group[4] or group[2] == group[3] == group[4] != group[0] == group[1]:
+                return 'triple+2'
+
+            else if group[0] == group[1] == group[2] == group[3] != group[4] or group[1] == group[2] == group[3] == group[4] != group[0]:
+                return 'four+1'
+                
+                
+
+
     # CARDS POLICIES
     def filter(self, prev_cards, holded_cards):
 
