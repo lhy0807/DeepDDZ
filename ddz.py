@@ -79,13 +79,21 @@ class DDZ:
 
         elif len(group) == 5:
             if group[4] == group[3] + 1 == group[2] + 2 == group[1] + 3 == group[0] + 4:
-                return 'shunzi'
+                return 'shunzi*5'
             
             elif group[0] == group[1] == group[2] != group[3] == group[4] or group[2] == group[3] == group[4] != group[0] == group[1]:
                 return 'triple+2'
 
-            elif group[0] == group[1] == group[2] == group[3] != group[4] or group[1] == group[2] == group[3] == group[4] != group[0]:
-                return 'four+1'
+            else:
+                return 'false'
+
+        elif len(group) == 6:
+            if group[5] == group[4] + 1 == group[3] + 2 == group[2] + 3 == group[1] + 4 == group[0] + 5:
+                return 'shunzi*6'
+
+            elif group[0] == group[1] == group[2] == group[3] != group[4] == group[5] or group[2] == group[3] == group[4] == group[5] != group[0] == group[1]:
+                return 'four+2'
+                
             else:
                 return 'false'
         
